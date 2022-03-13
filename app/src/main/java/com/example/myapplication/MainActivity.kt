@@ -32,11 +32,15 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String) {
-    Column(modifier = Modifier.background(Color.Green)
+    Column(modifier = Modifier
+        .background(Color.Green)
         .fillMaxSize(0.5f)
-        .width(300.dp)
+        .fillMaxWidth()
+        .padding(top = 12.dp, start = 50.dp)
     ) {
-
+        Text(text = "Hello world")
+        Spacer(modifier = Modifier.height(12.dp))
+        Text(text = "Hello Modifier")
     }
 }
 
