@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -38,7 +39,7 @@ fun Greeting(name: String) {
         .fillMaxWidth()
         .padding(top = 12.dp, start = 50.dp)
     ) {
-        Text(text = "Hello world")
+        Text(text = "Hello world", modifier = Modifier.clickable {  })
         Spacer(modifier = Modifier.height(12.dp))
         Text(text = "Hello Modifier")
     }
