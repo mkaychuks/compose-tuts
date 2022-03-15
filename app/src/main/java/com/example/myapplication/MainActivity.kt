@@ -48,7 +48,8 @@ fun ImageCard(
     title: String,
     modifier: Modifier = Modifier
 ){
-    Card(modifier = modifier.fillMaxWidth(),
+    Card(modifier = modifier.fillMaxWidth(0.5f)
+        .padding(16.dp),
         shape = RoundedCornerShape(15.dp),
         elevation = 5.dp
     ) {
