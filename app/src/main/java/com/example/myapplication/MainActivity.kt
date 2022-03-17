@@ -4,18 +4,16 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.myapplication.ui.theme.MyApplicationTheme
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +22,7 @@ class MainActivity : ComponentActivity() {
             MyApplicationTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    StateManagement()
+                    TextFieldsScaffold()
                 }
             }
         }
@@ -32,20 +30,41 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun StateManagement(){
-    val number = remember{
-        mutableStateOf(0)
+fun TextFieldsScaffold(){
+    val scaffoldState = rememberScaffoldState()
+
+    var textFieldState by remember{
+        mutableStateOf("")
     }
 
-    Column(horizontalAlignment = Alignment.CenterHorizontally,
+    val scope = rememberCoroutineScope()
+
+
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        scaffoldState = scaffoldState
+    ) {
+        Column(modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 30.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-        Text(text = "Button clicked ${number.value} time(s)")
-        Spacer(modifier = Modifier.height(12.dp))
-        Button(onClick = {
-            number.value += 1
-        }) {
-            Text(text = "Increase")
+            TextField(value = textFieldState, onValueChange = { newText ->
+                textFieldState = newText
+            },
+                singleLine = true,
+                label = { Text("Username")},
+                modifier = Modifier.fillMaxWidth()
+                )
+            Spacer(modifier = Modifier.height(12.dp))
+            Button(onClick = {
+                scope.launch {
+                    scaffoldState.snackbarHostState.showSnackbar("Hello $textFieldState", duration = SnackbarDuration.Short)
+                }
+            }) {
+                Text("Greet me")
+            }
         }
     }
 }
@@ -55,6 +74,6 @@ fun StateManagement(){
 @Composable
 fun DefaultPreview() {
     MyApplicationTheme {
-        StateManagement()
+        TextFieldsScaffold()
     }
 }
