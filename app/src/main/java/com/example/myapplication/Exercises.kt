@@ -65,16 +65,6 @@ fun OnBoarding(){
         .fillMaxSize()
         .padding(8.dp)) {
 
-        Image(painter = painterResource(id = R.drawable.ifeanyi),
-            contentDescription = "profile_photo",
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .size(100.dp)
-                .clip(CircleShape)
-                .border(width = 5.dp, color = Color.Blue)
-                .layoutId("image")
-            )
-
         // username input field
         OutlinedTextField(value = "", onValueChange = {},
                 label = { Text(text = "Username")},
