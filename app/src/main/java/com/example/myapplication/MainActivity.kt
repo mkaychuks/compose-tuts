@@ -42,8 +42,10 @@ fun SimpleAnimation(){
 
     val size by animateDpAsState(
             targetValue = sizeState,
-            spring(
-                Spring.DampingRatioHighBouncy
+            tween(
+                durationMillis = 5000,
+                delayMillis = 300,
+                easing = LinearOutSlowInEasing
             )
         )
 
