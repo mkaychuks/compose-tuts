@@ -26,8 +26,7 @@ class MainActivity : ComponentActivity() {
             MyApplicationTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-//                    SimpleAnimation()
-                    OnBoarding()
+                    SimpleAnimation()
                 }
             }
         }
