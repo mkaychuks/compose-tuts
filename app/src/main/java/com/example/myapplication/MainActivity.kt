@@ -26,7 +26,8 @@ class MainActivity : ComponentActivity() {
             MyApplicationTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    SimpleAnimation()
+//                    SimpleAnimation()
+                    OnBoarding()
                 }
             }
         }
@@ -64,8 +65,9 @@ fun SimpleAnimation(){
         .background(color),
         contentAlignment = Alignment.Center
     ){
-        Button(onClick = { /*TODO*/ }) {
+        Button(onClick = {
             sizeState += 50.dp
+        }) {
             Text(text = "Increase")
         }
     }

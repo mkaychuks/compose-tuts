@@ -1,67 +1,66 @@
 package com.example.myapplication
 
 
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.animation.animateColor
+import androidx.compose.animation.core.*
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.OutlinedButton
-import androidx.compose.material.OutlinedTextField
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.produceState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.ConstraintSet
-import androidx.constraintlayout.compose.Dimension
 
 
-private val onBoardingConstraints = ConstraintSet {
-    val username = createRefFor("username")
-    val button = createRefFor("button")
-    val topGuideline = createGuidelineFromTop(100.dp)
-    val bottomGuideline = createGuidelineFromBottom(180.dp)
-
-    constrain(username){
-        top.linkTo(topGuideline, margin = 8.dp)
-        start.linkTo(parent.start)
-        end.linkTo(parent.end)
-    }
-
-    constrain(button){
-        top.linkTo(username.bottom, margin = 8.dp)
-        start.linkTo(username.start)
-        end.linkTo(username.end)
-        bottom.linkTo(bottomGuideline)
-        width = Dimension.fillToConstraints
-    }
-}
 
 @Composable
 fun OnBoarding(){
-    ConstraintLayout(onBoardingConstraints, modifier = Modifier
-        .fillMaxSize()
-        .padding(8.dp)) {
+    var sizeState by remember{ mutableStateOf(200.dp)}
 
-        val labelHintState = produceState(initialValue = ""){
-            kotlinx.coroutines.delay(3000)
-            value = "Username"
+    val size by animateDpAsState(
+        targetValue = sizeState,
+        tween(
+            durationMillis = 5000,
+            delayMillis = 500,
+            easing = LinearOutSlowInEasing
+        )
+    )
+
+    val infiniteTransition = rememberInfiniteTransition()
+    val color by infiniteTransition.animateColor(
+        initialValue = Color.Red,
+        targetValue = Color.DarkGray,
+        animationSpec = InfiniteRepeatableSpec(
+            tween(
+                durationMillis = 5000,
+                delayMillis = 500,
+                easing = LinearOutSlowInEasing
+            ),
+            repeatMode = RepeatMode.Reverse
+        )
+    )
+
+    Box(modifier = Modifier
+        .size(size)
+        .clip(shape = CircleShape)
+        .background(color),
+    contentAlignment = Alignment.Center){
+        Button(onClick = {
+             sizeState += 50.dp
+        },
+            shape = RoundedCornerShape(12.dp)
+        ) {
+            Text(text = "Increase")
         }
-
-        // username input field
-        OutlinedTextField(value = "", onValueChange = {},
-                label = { Text(text = labelHintState.value)},
-                modifier = Modifier.layoutId("username")
-            )
-
-        OutlinedButton(onClick = { /*TODO*/ }, modifier = Modifier
-            .layoutId("button")
-            .size(60.dp)) {
-            Text("Login")
-        }
-
     }
 }
 
