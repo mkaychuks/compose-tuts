@@ -1,110 +1,131 @@
 package com.example.myapplication
 
-
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.LinearOutSlowInEasing
-import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.myapplication.ui.theme.Shapes
 
 
 @ExperimentalMaterialApi
 @Composable
-fun ExpandableCard(){
-    var expandedState by remember{ mutableStateOf(false)}
+fun OnBoardingAnimatedCard(){
+    var expandedState by remember { mutableStateOf(false)}
 
     val rotationState by animateFloatAsState(
         targetValue = if(expandedState) 180f else 0f
     )
 
-    // Parent container
-    Column(modifier = Modifier
-        .padding(12.dp)
-        .fillMaxSize()){
-        // parent card
+    // parent column
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+
+        // main card
         Card(
-            elevation = 12.dp,
-            shape = RoundedCornerShape(5.dp),
             modifier = Modifier
-                .fillMaxWidth()
                 .animateContentSize(
                     animationSpec = tween(
                         durationMillis = 300,
                         easing = LinearOutSlowInEasing
                     )
-                ),
+                )
+                .fillMaxWidth()
+                .fillMaxHeight(0.5f)
+                .padding(10.dp),
+            shape = Shapes.medium,
             onClick = {
                 expandedState = !expandedState
             }
         ) {
+            // column inside card
             Column(
-                modifier = Modifier.fillMaxWidth()
-                    .padding(12.dp)
+                modifier = Modifier
+                    .fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                // row card
+                // row inside column, inside the card
                 Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    // header text
-                    Text(
-                        modifier = Modifier.weight(6f),
-                        text = "Quote of the Day",
-                        maxLines = 1,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 20.sp,
-                    ) // header text
-
-                    // icon start
+                    Text(text = "OnBoarding", fontSize = 24.sp, textAlign = TextAlign.Center, fontWeight = FontWeight.Bold, modifier = Modifier.weight(6f))
                     IconButton(
-                        onClick = { expandedState = !expandedState },
+                        onClick = {
+                            expandedState = !expandedState
+                        },
                         modifier = Modifier
-                            .alpha(ContentAlpha.medium)
                             .weight(1f)
                             .rotate(rotationState)
                     ) {
-                        Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = "Drop-Down Arrow")
-                    } // icon end
-
-                } // row card
+                       Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = "Drop-Down")
+                    }
+                } // row inside column, inside the card
 
                 if(expandedState){
-                    Text(
-                        text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
-                                "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\n" +
-                                "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\n" +
-                                "consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\n" +
-                                "cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\n" +
-                                "proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                        fontSize = 14.sp,
-                        overflow = TextOverflow.Ellipsis
-                    )
+                    Details()
                 }
-            }
 
-        } // parent card
-    } // parent container
+            } // column inside card
+
+        } // main card
+
+    } // parent column
 }
+
+
+@Composable
+fun Details(){
+    OutlinedTextField(
+        value = "",
+        onValueChange ={},
+        label = { Text(text = "Username")},
+        leadingIcon = { Icon(imageVector = Icons.Filled.Person, contentDescription = "Username")}
+    )
+
+    OutlinedTextField(
+        value = "",
+        onValueChange ={},
+        label = { Text(text = "Password")},
+        leadingIcon = { Icon(imageVector = Icons.Filled.Lock, contentDescription = "Password")}
+    )
+    Spacer(modifier = Modifier.height(8.dp))
+
+    OutlinedButton(onClick = { /*TODO*/ }) {
+        Text(text = "LOGIN")
+    }
+}
+
+
+
+
+
+
 
 
 @ExperimentalMaterialApi
 @Preview(showBackground = true)
 @Composable
-fun Previewer(){
-    ExpandableCard()
+fun DefaultPreview1(){
+    OnBoardingAnimatedCard()
 }

@@ -7,8 +7,6 @@ import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
@@ -31,7 +29,7 @@ class MainActivity : ComponentActivity() {
             MyApplicationTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                        ExpandableCard()
+                    OnBoardingAnimatedCard()
                 }
             }
         }
@@ -86,6 +84,6 @@ fun SimpleAnimation(){
 @Composable
 fun DefaultPreview() {
     MyApplicationTheme {
-        ExpandableCard()
+        OnBoardingAnimatedCard()
     }
 }
