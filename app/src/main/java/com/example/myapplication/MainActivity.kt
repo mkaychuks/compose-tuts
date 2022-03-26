@@ -31,9 +31,7 @@ class MainActivity : ComponentActivity() {
             MyApplicationTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    Column(modifier = Modifier.padding(12.dp)) {
                         ExpandableCard()
-                    }
                 }
             }
         }
