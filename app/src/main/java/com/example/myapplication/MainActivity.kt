@@ -15,6 +15,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
@@ -34,7 +36,16 @@ class MainActivity : ComponentActivity() {
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        GoogleButton()
+                        SignUpForm()
+                        Spacer(modifier = Modifier.height(12.dp))
+                        ThirdPartyButton()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        ThirdPartyButton(
+                            title = "Sign Up with Instagram",
+                            loadingText = "Creating Account",
+                            icon = painterResource(id = R.drawable.ic_google),
+                            background = Color.Transparent
+                        )
                     }
                 }
             }
