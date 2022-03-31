@@ -31,7 +31,8 @@ class MainActivity : ComponentActivity() {
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        CoilImage()
+                        //CoilImage()
+                        PasswordTextField()
                     }
                 }
             }
@@ -53,6 +54,7 @@ fun CoilImage(){
             data = "https://www.bing.com/images/search?view=detailV2&ccid=9ZDZ4%2f90&id=218E38B4D2C1199E5C10DE8BEC478DE0691B0345&thid=OIP.9ZDZ4_90qBA093Z5YKOGdgHaEK&mediaurl=https%3a%2f%2fcdn2.expertreviews.co.uk%2fsites%2fexpertreviews%2ffiles%2fstyles%2fer_main_wide%2fpublic%2f2015%2f05%2fgoogle_photos.png%3fitok%3d65cfaqGF&cdnurl=https%3a%2f%2fth.bing.com%2fth%2fid%2fR.f590d9e3ff74a81034f7767960a38676%3frik%3dRQMbaeCNR%252byL3g%26pid%3dImgRaw%26r%3d0&exph=540&expw=960&q=google+photo&simid=608033735780417915&FORM=IRPRST&ck=6AB7CED57FAA27DFC1F0562511756CF8&selectedIndex=7",
             builder = {
                 placeholder(R.drawable.ic_google)
+                error(R.drawable.ic_google)
                 crossfade(1000)
                 transformations(
                     GrayscaleTransformation(),
@@ -77,6 +79,6 @@ fun CoilImage(){
 @Composable
 fun DefaultPreview() {
     MyApplicationTheme {
-
+        PasswordTextField()
     }
 }
