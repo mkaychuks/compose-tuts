@@ -19,6 +19,7 @@ import coil.transform.RoundedCornersTransformation
 import com.example.myapplication.ui.theme.MyApplicationTheme
 
 class MainActivity : ComponentActivity() {
+    @ExperimentalMaterialApi
     @ExperimentalCoilApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,9 +32,10 @@ class MainActivity : ComponentActivity() {
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        //CoilImage()
-                        PasswordTextField()
+                        CoilImager()
+                        //PasswordTextField()
                     }
+                    //AnimatedCardField()
                 }
             }
         }
@@ -79,6 +81,6 @@ fun CoilImage(){
 @Composable
 fun DefaultPreview() {
     MyApplicationTheme {
-        PasswordTextField()
+        //PasswordTextField()
     }
 }
