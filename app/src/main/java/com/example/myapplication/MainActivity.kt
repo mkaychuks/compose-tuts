@@ -9,8 +9,11 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
@@ -28,14 +31,47 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
                     Column(
-                        modifier = Modifier.fillMaxSize(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
+                        modifier = Modifier.fillMaxSize()
                     ) {
-                        CoilImager()
-                        //PasswordTextField()
+                        Row(modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(start = 20.dp)) {
+                            SignUpTexts(title = "Sign Up", fontSize = 28.sp, fontWeight = FontWeight.Bold)
+                        }
+                        Spacer(modifier = Modifier.height(45.dp))
+
+                        Row(modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(start = 20.dp)) {
+                            SignUpTexts(title = "Fullname", fontSize = 17.sp)
+                        }
+                        FormFields(formLabel = "Ebele Kayce", state = "")
+
+                        Spacer(modifier = Modifier.height(20.dp))
+
+                        Row(modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(start = 20.dp)) {
+                            SignUpTexts(title = "Email address", fontSize = 17.sp)
+                        }
+                        FormFields(formLabel = "dsgnbyk@gmail.com", state = "")
+
+                        Spacer(modifier = Modifier.height(20.dp))
+
+                        Row(modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(start = 20.dp)) {
+                            SignUpTexts(title = "Password", fontSize = 17.sp)
+                        }
+                        FormFields(formLabel = "***********", state = "")
+
+                        Spacer(modifier = Modifier.height(80.dp))
+
+                        SignUpButton(title = "Sign Up", fontSize = 17.sp, fontColor = Color.White)
+
                     }
-                    //AnimatedCardField()
                 }
             }
         }

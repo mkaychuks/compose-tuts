@@ -44,7 +44,7 @@ fun SignUpButton(
     Button(
         onClick = { /*TODO*/ },
         modifier = Modifier
-            .width(326.dp)
+            .width(346.dp)
             .height(60.dp),
         shape = RoundedCornerShape(15.dp),
         contentPadding = PaddingValues(),
@@ -62,15 +62,15 @@ fun FormFields(
     formLabel: String,
     state: String
 ){
-    var buttonState by remember { mutableStateOf(state)}
+    var formFieldState by remember { mutableStateOf(state)}
     OutlinedTextField(
-        value = buttonState,
-        onValueChange = {buttonState = it},
-        label = {
+        value = formFieldState,
+        onValueChange = {formFieldState = it},
+        placeholder = {
             Text(text = formLabel)
         },
         modifier = Modifier
-            .width(326.dp)
+            .width(346.dp)
             .height(70.dp),
         shape = RoundedCornerShape(15.dp)
     )
@@ -118,11 +118,41 @@ fun DefaultPreviewer(){
         verticalArrangement = Arrangement.Center,
         modifier = Modifier.fillMaxSize()
     ) {
-        Row() {
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 20.dp)) {
             SignUpTexts(title = "Sign Up", fontSize = 28.sp, fontWeight = FontWeight.Bold)
         }
-        Spacer(modifier = Modifier.height(8.dp))
-        SignUpButton(title = "Sign Up", fontSize = 17.sp, fontColor = Color.White)
+        Spacer(modifier = Modifier.height(45.dp))
+
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 20.dp)) {
+            SignUpTexts(title = "Fullname", fontSize = 17.sp)
+        }
         FormFields(formLabel = "Ebele Kayce", state = "")
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 20.dp)) {
+            SignUpTexts(title = "Email address", fontSize = 17.sp)
+        }
+        FormFields(formLabel = "dsgnbyk@gmail.com", state = "")
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 20.dp)) {
+            SignUpTexts(title = "Password", fontSize = 17.sp)
+        }
+        FormFields(formLabel = "***********", state = "")
+
+        Spacer(modifier = Modifier.height(80.dp))
+
+        SignUpButton(title = "Sign Up", fontSize = 17.sp, fontColor = Color.White)
+
     }
 }
