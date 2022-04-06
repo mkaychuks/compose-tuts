@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.fillMaxSize(),
                         contentAlignment = Alignment.Center
                     ){
-                        CircularProgressBar(percentage = 0.8f, number = 100, )
+                        CircularProgressBar(percentage = 0.6f, number = 100)
                     }
                 }
             }
